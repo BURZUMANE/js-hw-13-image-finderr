@@ -1,0 +1,134 @@
+html {
+  box-sizing: border-box;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+
+  background:rgb(10, 19, 19);
+}
+
+ul{
+  list-style: none;
+}
+
+/* ul {
+  height: calc(100% -40px);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  width: 16.6666666667%;
+}
+
+li img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+} */
+
+.photo-card {
+  position: relative;
+}
+
+
+.stats {
+  padding: 30px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .52);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+
+.stats-item{
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.stats:hover {
+  opacity: 1;
+}
+
+/* SEARCH BOX */
+.searchBox {
+  background: #2f3640;
+  position: relative;
+  height: 40px;
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 100%;
+
+}
+
+
+.searchButton {
+  position: absolute;
+  top:50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: none;
+  color: #fff;
+  border: none;
+
+}
+
+.loadButton{
+  width: 100%;
+  background: #2f3640;
+  border: none;
+  color: #fff;
+  height: 40px;
+  transition: 0.4s;
+  line-height: 40px;
+}
+
+
+/* --------------- */
+
+
+.grid {
+  /* max-width: 1200px; */
+}
+
+.grid-sizer,
+.grid-item{
+  width: 25% ;
+}
+
+
+img {
+  display: block;
+  max-width: 100%;
+}
