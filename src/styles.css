@@ -73,9 +73,23 @@ li img {
 
 /* SEARCH BOX */
 .searchBox {
+  position: fixed;
+  right: 0;
+  z-index: 10;
   background: #2f3640;
-  position: relative;
-  height: 40px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  transition: 0.4s;
+  height: 60px;
+  border-radius: 40px;
+  padding: 10px;
+  
+}
+.searchBox:hover {
+  display: block;
+  width: 30%;
+  padding: 0 6px;
 }
 
 .searchInput {
@@ -83,7 +97,7 @@ li img {
   background: none;
   outline: none;
   float: left;
-  padding: 0;
+  padding: 10px;
   color: white;
   font-size: 16px;
   transition: 0.4s;
@@ -101,6 +115,11 @@ li img {
   background: none;
   color: #fff;
   border: none;
+    background: #2f3640;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  transition: 0.4s;
 
 }
 
@@ -120,15 +139,25 @@ li img {
 
 .grid {
   /* max-width: 1200px; */
+  height: 100vh;
+
 }
+
 
 .grid-sizer,
 .grid-item{
   width: 25% ;
 }
 
-
+.tall{
+  height: 100vh;
+  background-color: black;
+}
 img {
   display: block;
   max-width: 100%;
+}
+
+.wrapper{
+  min-height: 100vh;
 }

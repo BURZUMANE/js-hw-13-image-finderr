@@ -1,15 +1,19 @@
 import imageService from './services/apiService';
 // import spinner from './spinner';
+import 'basiclightbox/dist/basicLightbox.min.css'
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 import makeGridItems from './makeGridItems';
-import InfiniteScroll from 'infinite-scroll';
+
+// PROBLEM WITH IMPORT
+const basicLightbox = require('basiclightbox');
 
 const refs = {
     searchForm: document.querySelector('#search-form'),
     imageList: document.querySelector('#gallery'),
     loadMore: document.querySelector('button[data-action="load-more"]'),
     grid: document.querySelector('.grid'),
+    stats: document.querySelector('.stats'),
 }
 
 refs.searchForm.addEventListener('submit', searchFormSubmitHandler);
@@ -20,11 +24,12 @@ let currentHeight = 0;
 
 // LOAD MORE
 
-function loadMoreBtnHandler(e) {
+function loadMoreBtnHandler() {
     // spinner.show()
     imageService.fetchImages().then(images => {
         // spinner.hide();
         appendedMarkUp(images);
+        refs.grid.addEventListener('click', lightBoxHandle)
     }).catch(error => {
         console.warn(error);
     });
@@ -58,9 +63,7 @@ function appendedMarkUp(arr) {
     });
     refs.grid.append(...elements);
     const imgLoad = imagesLoaded('.grid');
-    console.log(msnry)
     msnry.appended(elements);
-    console.log(msnry)
     imgLoad.on('progress', msnry.layout.bind(msnry));
 }
 
@@ -91,29 +94,27 @@ imgLoad.once('progress', () => {
     msnry.layout();
 });
 
+function load(){
+    imageService.fetchImages().then(images => {
+        // spinner.hide();
+        appendedMarkUp(images);
+    }).catch(error => {
+        console.warn(error);
+    });
+}
 
-var elem = document.querySelector('.container');
-var infScroll = new InfiniteScroll(elem, {
-    // options
-    path() {
-        return imageService.loader()
-    },
-    append: '.post123',
-    history: false,
-});
 
-// infScroll.on( 'load', function( response ) {
-//     // parse response into JSON data
-//     var data = JSON.parse( response );
-//     // compile data into HTML
-//     var itemsHTML = data.map( getItemHTML ).join('');
-//     // convert HTML string into elements
-//     proxyElem.innerHTML = itemsHTML;
-//     // append item elements
-//     var items = proxyElem.querySelectorAll('.photo-item');
-//     imagesLoaded( items, function() {
-//       infScroll.appendItems( items );
-//       msnry.appended( items );
-//     });
-//   });
-  
+const observer = new IntersectionObserver(loadMoreBtnHandler,{});
+observer.observe(refs.loadMore);
+
+
+
+function lightBoxHandle(e){
+    if(e.target.nodeName !== 'UL') return;
+    const src = e.target.dataset.source;
+    const instance = basicLightbox.create(`
+    <img width="1400" height="900" class="box-image"
+    src="${src}">
+	`)
+    instance.show();
+}
